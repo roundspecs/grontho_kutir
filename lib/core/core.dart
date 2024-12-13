@@ -1,4 +1,4 @@
-export 'error/failure.dart';
+export 'error/error.dart';
 export 'theme/theme.dart';
 export 'validators/id_validator.dart';
 export 'validators/name_validator.dart';
