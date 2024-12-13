@@ -1,8 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
-import '../datasource/auth_remote_data_source.dart';
-
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
   const AuthRepositoryImpl(this.authRemoteDataSource);

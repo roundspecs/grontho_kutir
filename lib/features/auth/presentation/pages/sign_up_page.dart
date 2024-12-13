@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -11,6 +12,11 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _idController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextFormField(
+                      controller: _nameController,
                       decoration: const InputDecoration(
                         labelText: 'Name',
                       ),
@@ -39,6 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
+                      controller: _idController,
                       decoration: const InputDecoration(
                         labelText: 'Email',
                         prefixText: "u",
@@ -48,6 +56,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
+                      controller: _passwordController,
                       obscureText: true,
                       decoration: const InputDecoration(
                         labelText: 'Password',
@@ -56,6 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
+                      controller: _confirmPasswordController,
                       obscureText: true,
                       decoration: const InputDecoration(
                         labelText: 'Confirm Password',
@@ -65,7 +75,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SizedBox(height: 16),
                     FilledButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {}
+                          if (_formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                                  AuthSignUpWithEmailAndPassword(
+                                    name: _nameController.text,
+                                    email: idToEmail(_idController.text),
+                                    password: _passwordController.text,
+                                  ),
+                                );
+                          }
                         },
                         child: Text('Sign Up')),
                   ],

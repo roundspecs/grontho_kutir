@@ -11,6 +11,9 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> {
   final _formKey = GlobalKey<FormState>();
+  final _idController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +35,7 @@ class _SignInPageState extends State<SignInPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextFormField(
+                      controller: _idController,
                       decoration: const InputDecoration(
                         labelText: 'Email',
                         prefixText: "u",
@@ -41,6 +45,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
+                      controller: _passwordController,
                       decoration: const InputDecoration(
                         labelText: 'Password',
                       ),

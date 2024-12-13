@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Supabase.initialize(
+  final supabase = await Supabase.initialize(
     url: Secrets.supabaseUrl,
     anonKey: Secrets.supabaseAnonKey,
   );
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider(
+        create: (context) => AuthBloc(
+          signUpUsecase: SignUpUsecase(
+            AuthRepositoryImpl(
+              AuthRemoteDataSourceImpl(
+                supabaseClient: supabase.client,
+              ),
+            ),
+          ),
+        ),
+      ),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
