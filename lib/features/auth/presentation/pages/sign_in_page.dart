@@ -47,10 +47,11 @@ class _SignInPageState extends State<SignInPage> {
                       validator: passwordValidator,
                     ),
                     const SizedBox(height: 16),
-                    FilledButton(onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                      }
-                    }, child: Text('Sign In')),
+                    FilledButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {}
+                        },
+                        child: Text('Sign In')),
                   ],
                 ),
               ),
