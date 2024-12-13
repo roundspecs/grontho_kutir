@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: Secrets.supabaseUrl,
+    anonKey: Secrets.supabaseAnonKey,
+  );
   runApp(const MyApp());
 }
 
