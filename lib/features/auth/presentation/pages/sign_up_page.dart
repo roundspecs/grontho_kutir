@@ -33,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   children: [
                     TextFormField(
                       decoration: const InputDecoration(
-                        labelText: 'Full Name',
+                        labelText: 'Name',
                       ),
                       validator: nameValidator,
                     ),
