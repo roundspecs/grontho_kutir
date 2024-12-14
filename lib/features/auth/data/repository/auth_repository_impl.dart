@@ -16,8 +16,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, String>> singUpWithEmailAndPassword({
     required String name,
-    required String hallName,
-    required String roomNumber,
+    required String? hallName,
+    required int? roomNumber,
     required String email,
     required String password,
   }) async {

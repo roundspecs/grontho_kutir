@@ -18,8 +18,8 @@ class SignUpUsecase implements Usecase<String, SignUpParams> {
 
 class SignUpParams {
   final String name;
-  final String hallName;
-  final String roomNumber;
+  final String? hallName;
+  final int? roomNumber;
   final String email;
   final String password;
 

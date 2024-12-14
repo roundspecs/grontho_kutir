@@ -18,6 +18,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final _confirmPasswordController = TextEditingController();
   final _hallNameController = TextEditingController();
   final _roomNumberController = TextEditingController();
+  bool stayInHall = true;
 
   @override
   Widget build(BuildContext context) {
@@ -58,47 +59,83 @@ class _SignUpPageState extends State<SignUpPage> {
                       keyboardType: TextInputType.number,
                     ),
                     const SizedBox(height: 16),
-                    DropdownButtonFormField<String>(
+                    DropdownButtonFormField<bool>(
+                      value: stayInHall,
                       decoration: const InputDecoration(
-                        labelText: 'Hall',
+                        labelText: 'Stay in Hall',
                       ),
                       items: const [
                         DropdownMenuItem(
-                          value: 'Qudrat-e-Khuda Hall',
-                          child: Text('Qudrat-e-Khuda Hall'),
+                          value: true,
+                          child: Text('Yes'),
                         ),
                         DropdownMenuItem(
-                          value: 'Tareq Huda Hall',
-                          child: Text('Tareq Huda Hall'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Shah Hall',
-                          child: Text('Shah Hall'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Abu Sayed Hall',
-                          child: Text('Abu Sayed Hall'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Titumir Hall',
-                          child: Text('Titumir Hall'),
+                          value: false,
+                          child: Text('No'),
                         ),
                       ],
                       onChanged: (value) {
-                        _hallNameController.text = value!;
+                        setState(() {
+                          stayInHall = value!;
+                        });
                       },
-                      validator: hallNameValidator,
                     ),
                     const SizedBox(height: 16),
-                    TextFormField(
-                      controller: _roomNumberController,
-                      decoration: const InputDecoration(
-                        labelText: 'Room No',
+                    if (stayInHall) ...[
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: DropdownButtonFormField<String>(
+                              isExpanded: true,
+                              decoration: const InputDecoration(
+                                labelText: 'Hall',
+                              ),
+                              items: const [
+                                DropdownMenuItem(
+                                  value: 'Qudrat-e-Khuda Hall',
+                                  child: Text('Qudrat-e-Khuda Hall'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Tareq Huda Hall',
+                                  child: Text('Tareq Huda Hall'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Shah Hall',
+                                  child: Text('Shah Hall'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Abu Sayed Hall',
+                                  child: Text('Abu Sayed Hall'),
+                                ),
+                                DropdownMenuItem(
+                                  value: 'Titumir Hall',
+                                  child: Text('Titumir Hall'),
+                                ),
+                              ],
+                              onChanged: (value) {
+                                _hallNameController.text = value!;
+                              },
+                              validator: stayInHall ? hallNameValidator : null,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              controller: _roomNumberController,
+                              decoration: const InputDecoration(
+                                labelText: 'Room No',
+                              ),
+                              validator:
+                                  stayInHall ? roomNumberValidator : null,
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
+                        ],
                       ),
-                      validator: roomNumberValidator,
-                      keyboardType: TextInputType.number,
-                    ),
-                    const SizedBox(height: 16),
+                      const SizedBox(height: 16),
+                    ],
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
@@ -125,8 +162,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           context.read<AuthBloc>().add(
                                 AuthSignUpWithEmailAndPassword(
                                   name: _nameController.text,
-                                  hallName: _hallNameController.text,
-                                  roomNumber: _roomNumberController.text,
+                                  hallName: _hallNameController.text.isEmpty
+                                      ? null
+                                      : _hallNameController.text,
+                                  roomNumber: _roomNumberController.text.isEmpty
+                                      ? null
+                                      : int.tryParse(
+                                          _roomNumberController.text,
+                                        ),
                                   email: idToEmail(_idController.text),
                                   password: _passwordController.text,
                                 ),
