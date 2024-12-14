@@ -74,18 +74,19 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     const SizedBox(height: 16),
                     FilledButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            context.read<AuthBloc>().add(
-                                  AuthSignUpWithEmailAndPassword(
-                                    name: _nameController.text,
-                                    email: idToEmail(_idController.text),
-                                    password: _passwordController.text,
-                                  ),
-                                );
-                          }
-                        },
-                        child: Text('Sign Up')),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<AuthBloc>().add(
+                                AuthSignUpWithEmailAndPassword(
+                                  name: _nameController.text,
+                                  email: idToEmail(_idController.text),
+                                  password: _passwordController.text,
+                                ),
+                              );
+                        }
+                      },
+                      child: Text('Sign Up'),
+                    ),
                   ],
                 ),
               ),
