@@ -9,6 +9,8 @@ abstract interface class AuthRepository {
 
   Future<Either<Failure, String>> singUpWithEmailAndPassword({
     required String name,
+    required String hallName,
+    required String roomNumber,
     required String email,
     required String password,
   });

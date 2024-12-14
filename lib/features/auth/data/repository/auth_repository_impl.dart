@@ -16,12 +16,16 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, String>> singUpWithEmailAndPassword({
     required String name,
+    required String hallName,
+    required String roomNumber,
     required String email,
     required String password,
   }) async {
     try {
       final response = await authRemoteDataSource.singUpWithEmailAndPassword(
         name: name,
+        hallName: hallName,
+        roomNumber: roomNumber,
         email: email,
         password: password,
       );

@@ -13,6 +13,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignUpWithEmailAndPassword>((event, emit) async {
       final response = await _signUpUsecase(SignUpParams(
         name: event.name,
+        hallName: event.hallName,
+        roomNumber: event.roomNumber,
         email: event.email,
         password: event.password,
       ));

@@ -8,6 +8,8 @@ class SignUpUsecase implements Usecase<String, SignUpParams> {
   Future<Either<Failure, String>> call(params) async {
     return await authRepository.singUpWithEmailAndPassword(
       name: params.name,
+      hallName: params.hallName,
+      roomNumber: params.roomNumber,
       email: params.email,
       password: params.password,
     );
@@ -16,11 +18,15 @@ class SignUpUsecase implements Usecase<String, SignUpParams> {
 
 class SignUpParams {
   final String name;
+  final String hallName;
+  final String roomNumber;
   final String email;
   final String password;
 
   SignUpParams({
     required this.name,
+    required this.hallName,
+    required this.roomNumber,
     required this.email,
     required this.password,
   });

@@ -16,6 +16,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  final _hallNameController = TextEditingController();
+  final _roomNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +55,48 @@ class _SignUpPageState extends State<SignUpPage> {
                         suffixText: "@student.cuet.ac.bd",
                       ),
                       validator: idValidator,
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(height: 16),
+                    DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        labelText: 'Hall',
+                      ),
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'Qudrat-e-Khuda Hall',
+                          child: Text('Qudrat-e-Khuda Hall'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Tareq Huda Hall',
+                          child: Text('Tareq Huda Hall'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Shah Hall',
+                          child: Text('Shah Hall'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Abu Sayed Hall',
+                          child: Text('Abu Sayed Hall'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Titumir Hall',
+                          child: Text('Titumir Hall'),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        _hallNameController.text = value!;
+                      },
+                      validator: hallNameValidator,
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _roomNumberController,
+                      decoration: const InputDecoration(
+                        labelText: 'Room No',
+                      ),
+                      validator: roomNumberValidator,
+                      keyboardType: TextInputType.number,
                     ),
                     const SizedBox(height: 16),
                     TextFormField(
@@ -75,10 +119,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SizedBox(height: 16),
                     FilledButton(
                       onPressed: () {
-                        if (_formKey.currentState!.validate()) {
+                        if (_passwordController.text ==
+                                _confirmPasswordController.text &&
+                            _formKey.currentState!.validate()) {
                           context.read<AuthBloc>().add(
                                 AuthSignUpWithEmailAndPassword(
                                   name: _nameController.text,
+                                  hallName: _hallNameController.text,
+                                  roomNumber: _roomNumberController.text,
                                   email: idToEmail(_idController.text),
                                   password: _passwordController.text,
                                 ),
