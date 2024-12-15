@@ -3,7 +3,7 @@ String? roomNumberValidator(String? value) {
     return 'Cannot be empty';
   }
   final id = int.tryParse(value);
-  if (id == null) {
+  if (id == null || value.length > 5) {
     return 'Enter a valid ID';
   }
   return null;

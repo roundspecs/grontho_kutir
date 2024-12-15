@@ -162,14 +162,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           context.read<AuthBloc>().add(
                                 AuthSignUpWithEmailAndPassword(
                                   name: _nameController.text,
-                                  hallName: _hallNameController.text.isEmpty
-                                      ? null
-                                      : _hallNameController.text,
-                                  roomNumber: _roomNumberController.text.isEmpty
-                                      ? null
-                                      : int.tryParse(
-                                          _roomNumberController.text,
-                                        ),
+                                  hallName: _hallNameController.text,
+                                  roomNumber: _roomNumberController.text,
                                   email: idToEmail(_idController.text),
                                   password: _passwordController.text,
                                 ),

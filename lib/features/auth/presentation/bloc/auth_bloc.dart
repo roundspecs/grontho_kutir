@@ -19,8 +19,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       ));
       response.fold(
-        (failure) => emit(AuthFailure(failure.message)),
-        (userId) => emit(AuthSuccess(userId)),
+        (failure) {
+          debugPrint(failure.message);
+          emit(AuthFailure(failure.message));
+        },
+        (userId) {
+          debugPrint("User created with id: $userId");
+          emit(AuthSuccess(userId));
+        },
       );
     });
   }

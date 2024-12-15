@@ -5,8 +5,8 @@ sealed class AuthEvent {}
 
 class AuthSignUpWithEmailAndPassword extends AuthEvent {
   final String name;
-  final String? hallName;
-  final int? roomNumber;
+  final String hallName;
+  final String roomNumber;
   final String email;
   final String password;
 

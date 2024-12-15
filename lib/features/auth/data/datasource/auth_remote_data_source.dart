@@ -9,8 +9,8 @@ abstract interface class AuthRemoteDataSource {
 
   Future<String> singUpWithEmailAndPassword({
     required String name,
-    required String? hallName,
-    required int? roomNumber,
+    required String hallName,
+    required String roomNumber,
     required String email,
     required String password,
   });
@@ -31,8 +31,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<String> singUpWithEmailAndPassword({
     required String name,
-    required String? hallName,
-    required int? roomNumber,
+    required String hallName,
+    required String roomNumber,
     required String email,
     required String password,
   }) async {
@@ -40,11 +40,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final response = await supabaseClient.auth.signUp(
         email: email,
         password: password,
-        data: {
-          "name": name,
-          if (hallName != null) "hall_name": hallName,
-          if (roomNumber != null) "room_number": roomNumber,
-        },
+        data: {"name": name, "hall_name": hallName, "room_number": roomNumber},
       );
       if (response.user == null) {
         throw ServerException("Failed to sign up");
