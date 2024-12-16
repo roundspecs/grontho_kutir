@@ -13,3 +13,16 @@ String? passwordValidator(String? value) {
   }
   return null;
 }
+
+String? Function(String?)? confirmPasswordValidator(String password) {
+  return (String? value) {
+    if (value != password) {
+      return 'Passwords do not match';
+    }
+    final errorText = passwordValidator(value);
+    if (errorText != null) {
+      return errorText;
+    }
+    return null;
+  };
+}

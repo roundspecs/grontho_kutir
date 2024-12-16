@@ -151,14 +151,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       decoration: const InputDecoration(
                         labelText: 'Confirm Password',
                       ),
-                      validator: passwordValidator,
+                      validator: confirmPasswordValidator(
+                        _passwordController.text,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     FilledButton(
                       onPressed: () {
-                        if (_passwordController.text ==
-                                _confirmPasswordController.text &&
-                            _formKey.currentState!.validate()) {
+                        if (_formKey.currentState!.validate()) {
                           context.read<AuthBloc>().add(
                                 AuthSignUpWithEmailAndPassword(
                                   name: _nameController.text,
