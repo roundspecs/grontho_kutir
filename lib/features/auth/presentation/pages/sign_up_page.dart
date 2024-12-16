@@ -147,8 +147,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       decoration: const InputDecoration(
                         labelText: 'Confirm Password',
                       ),
-                      validator: confirmPasswordValidator(
+                      validator: (value) => confirmPasswordValidator(
                         _passwordController.text,
+                        value,
                       ),
                     ),
                     FilledButton(
