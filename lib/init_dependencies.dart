@@ -8,19 +8,12 @@ Future<void> initDependencies() async {
     anonKey: Secrets.supabaseAnonKey,
   );
 
-  GetIt.I.registerLazySingleton(
-    () => supabase.client,
-  );
-  GetIt.I.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(GetIt.I()),
-  );
-  GetIt.I.registerLazySingleton<AuthRepository>(
-    () => AuthRepositoryImpl(GetIt.I()),
-  );
-  GetIt.I.registerLazySingleton(
-    () => SignUpUsecase(GetIt.I()),
-  );
-  GetIt.I.registerLazySingleton(
-    () => AuthBloc(signUpUsecase: GetIt.I()),
-  );
+  GetIt.I
+    ..registerLazySingleton(() => supabase.client)
+    ..registerLazySingleton<AuthRemoteDataSource>(
+      () => AuthRemoteDataSourceImpl(GetIt.I()),
+    )
+    ..registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(GetIt.I()))
+    ..registerLazySingleton(() => SignUpUsecase(GetIt.I()))
+    ..registerLazySingleton(() => AuthBloc(signUpUsecase: GetIt.I()));
 }

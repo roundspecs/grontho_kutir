@@ -25,6 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: Center(
         child: Column(
+          spacing: 16,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Spacer(),
@@ -32,12 +33,12 @@ class _SignUpPageState extends State<SignUpPage> {
               'Create an account to get started',
               style: TextStyle(fontSize: 24),
             ),
-            SizedBox(height: 16),
             ConstrainedBox(
               constraints: BoxConstraints(maxWidth: 400),
               child: Form(
                 key: _formKey,
                 child: Column(
+                  spacing: 16,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextFormField(
@@ -47,7 +48,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       validator: nameValidator,
                     ),
-                    const SizedBox(height: 16),
                     TextFormField(
                       controller: _idController,
                       decoration: const InputDecoration(
@@ -58,7 +58,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       validator: idValidator,
                       keyboardType: TextInputType.number,
                     ),
-                    const SizedBox(height: 16),
                     DropdownButtonFormField<bool>(
                       value: stayInHall,
                       decoration: const InputDecoration(
@@ -80,9 +79,9 @@ class _SignUpPageState extends State<SignUpPage> {
                         });
                       },
                     ),
-                    const SizedBox(height: 16),
                     if (stayInHall) ...[
                       Row(
+                        spacing: 8,
                         children: [
                           Expanded(
                             flex: 2,
@@ -119,7 +118,6 @@ class _SignUpPageState extends State<SignUpPage> {
                               validator: stayInHall ? hallNameValidator : null,
                             ),
                           ),
-                          const SizedBox(width: 8),
                           Expanded(
                             flex: 1,
                             child: TextFormField(
@@ -134,7 +132,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
                     ],
                     TextFormField(
                       controller: _passwordController,
@@ -144,7 +141,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       validator: passwordValidator,
                     ),
-                    const SizedBox(height: 16),
                     TextFormField(
                       controller: _confirmPasswordController,
                       obscureText: true,
@@ -155,7 +151,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         _passwordController.text,
                       ),
                     ),
-                    const SizedBox(height: 16),
                     FilledButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -176,12 +171,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16),
             Row(
+              spacing: 8,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text('Already have an account?'),
-                SizedBox(width: 8),
                 InkWell(
                   onTap: () {
                     Navigator.of(context).pushNamed(SignInPage.route);
