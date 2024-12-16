@@ -12,6 +12,7 @@ abstract interface class AuthRepository {
     required String hallName,
     required String roomNumber,
     required String email,
+    required String phoneNumber,
     required String password,
   });
 }

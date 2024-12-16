@@ -12,6 +12,7 @@ abstract interface class AuthRemoteDataSource {
     required String hallName,
     required String roomNumber,
     required String email,
+    required String phoneNumber,
     required String password,
   });
 }
@@ -34,13 +35,19 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String hallName,
     required String roomNumber,
     required String email,
+    required String phoneNumber,
     required String password,
   }) async {
     try {
       final response = await supabaseClient.auth.signUp(
         email: email,
         password: password,
-        data: {"name": name, "hall_name": hallName, "room_number": roomNumber},
+        data: {
+          "name": name,
+          "hall_name": hallName,
+          "room_number": roomNumber,
+          "phone_number": phoneNumber,
+        },
       );
       if (response.user == null) {
         throw ServerException("Failed to sign up");

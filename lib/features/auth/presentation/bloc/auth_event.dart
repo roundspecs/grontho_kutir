@@ -8,6 +8,7 @@ class AuthSignUpWithEmailAndPassword extends AuthEvent {
   final String hallName;
   final String roomNumber;
   final String email;
+  final String phoneNumber;
   final String password;
 
   AuthSignUpWithEmailAndPassword({
@@ -15,6 +16,7 @@ class AuthSignUpWithEmailAndPassword extends AuthEvent {
     required this.hallName,
     required this.roomNumber,
     required this.email,
+    required this.phoneNumber,
     required this.password,
   });
 }

@@ -11,6 +11,7 @@ class SignUpUsecase implements Usecase<String, SignUpParams> {
       hallName: params.hallName,
       roomNumber: params.roomNumber,
       email: params.email,
+      phoneNumber: params.phoneNumber,
       password: params.password,
     );
   }
@@ -21,6 +22,7 @@ class SignUpParams {
   final String hallName;
   final String roomNumber;
   final String email;
+  final String phoneNumber;
   final String password;
 
   SignUpParams({
@@ -28,6 +30,7 @@ class SignUpParams {
     required this.hallName,
     required this.roomNumber,
     required this.email,
+    required this.phoneNumber,
     required this.password,
   });
 }
