@@ -14,28 +14,22 @@ jobs:
             channel: stable
             flutter-version: 3.27.0
 
-        - name: Check Flutter Version
-          run: flutter --version
-
         - name: Create .env File
           run: |
             echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
             echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
-        
-        - name: Check .env File
-          run: cat .env
 
-        # - name: Build Website
-        #   run: |
-        #     flutter config --enable-web
-        #     flutter pub get
-        #     flutter build web --release
-        #   working-directory: ./
+        - name: Build Website
+          run: |
+            flutter config --enable-web
+            flutter pub get
+            flutter build web --release
+          working-directory: ./
 
-        # - name: Deploy Firebase Hosting
-        #   uses: w9jds/firebase-action@master
-        #   with:
-        #     args: deploy --only hosting:web-johannesmilke
-        #   env:
-        #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        # #     PROJECT_PATH: ./
+        - name: Deploy Firebase Hosting
+          uses: w9jds/firebase-action@master
+          with:
+            args: deploy --only hosting:grontho-kutir
+          env:
+            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+            PROJECT_PATH: ./
