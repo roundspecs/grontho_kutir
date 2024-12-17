@@ -1,16 +1,18 @@
-# grontho_kutir
+# Grontho Kutir
 
-A new Flutter project.
+## Learning Goals
+- [x] Flutter
+- [x] Bloc
+- [ ] Github/Gitlab pipeline
+- [ ] Deploy in Firebase
+- [ ] PostgreSQL
+- [ ] Authentication in Supabase
+- [ ] Storage in Supabase
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contribution Guidelines
+- Format the code before committing:
+  ```sh
+  dart format .
+  dart fix --apply
+  dart analyze .
+  ```
