@@ -16,69 +16,73 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          spacing: 16,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Spacer(),
-            const Text(
-              'Welcome back!',
-              style: TextStyle(fontSize: 24),
-            ),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 400),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  spacing: 16,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    TextFormField(
-                      controller: _idController,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        prefixText: "u",
-                        suffixText: "@student.cuet.ac.bd",
-                      ),
-                      validator: idValidator,
-                    ),
-                    TextFormField(
-                      controller: _passwordController,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                      ),
-                      validator: passwordValidator,
-                    ),
-                    FilledButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
-                      },
-                      child: Text('Sign In'),
-                    ),
-                  ],
-                ),
+    return Title(
+      color: Theme.of(context).colorScheme.primary,
+      title: "Sign In - Grontho Kutir",
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            spacing: 16,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Spacer(),
+              const Text(
+                'Welcome back!',
+                style: TextStyle(fontSize: 24),
               ),
-            ),
-            Row(
-              spacing: 8,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Don\'t have an account?'),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(SignUpPage.route);
-                  },
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(decoration: TextDecoration.underline),
+              ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 400),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    spacing: 16,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      TextFormField(
+                        controller: _idController,
+                        decoration: const InputDecoration(
+                          labelText: 'Email',
+                          prefixText: "u",
+                          suffixText: "@student.cuet.ac.bd",
+                        ),
+                        validator: idValidator,
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        decoration: const InputDecoration(
+                          labelText: 'Password',
+                        ),
+                        validator: passwordValidator,
+                      ),
+                      FilledButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {}
+                        },
+                        child: Text('Sign In'),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            Spacer(),
-          ],
+              ),
+              Row(
+                spacing: 8,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Don\'t have an account?'),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).pushNamed(SignUpPage.route);
+                    },
+                    child: const Text(
+                      'Sign Up',
+                      style: TextStyle(decoration: TextDecoration.underline),
+                    ),
+                  ),
+                ],
+              ),
+              Spacer(),
+            ],
+          ),
         ),
       ),
     );
