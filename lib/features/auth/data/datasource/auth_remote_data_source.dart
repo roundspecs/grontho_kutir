@@ -1,13 +1,14 @@
 import 'package:grontho_kutir/core/core.dart';
+import 'package:grontho_kutir/features/auth/data/models/user_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<String> signInWithEmailAndPassword({
+  Future<UserModel> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
 
-  Future<String> singUpWithEmailAndPassword({
+  Future<UserModel> singUpWithEmailAndPassword({
     required String name,
     required String hallName,
     required String roomNumber,
@@ -22,15 +23,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   AuthRemoteDataSourceImpl(this.supabaseClient);
 
   @override
-  Future<String> signInWithEmailAndPassword({
+  Future<UserModel> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
-    return "TODO";
+    throw UnimplementedError();
   }
 
   @override
-  Future<String> singUpWithEmailAndPassword({
+  Future<UserModel> singUpWithEmailAndPassword({
     required String name,
     required String hallName,
     required String roomNumber,
@@ -52,7 +53,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       if (response.user == null) {
         throw ServerException("Failed to sign up");
       }
-      return response.user!.id;
+      return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
       throw ServerException(e.toString());
     }

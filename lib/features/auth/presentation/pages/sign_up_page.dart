@@ -26,67 +26,79 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          spacing: 16,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Spacer(),
-            const Text(
-              'Create an account to get started',
-              style: TextStyle(fontSize: 24),
-            ),
-            ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 400),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  spacing: 16,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _nameTextField(),
-                    _emailTextField(),
-                    _phoneNumberTextField(),
-                    _stayInHallDropdown(),
-                    if (stayInHall) ...[
-                      Row(
-                        spacing: 8,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: _hallDropdown(),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: _roomNumberTextField(),
+        child: BlocConsumer<AuthBloc, AuthState>(
+          buildWhen: (previous, current) => current is! AuthFailure,
+          listenWhen: (previous, current) => current is AuthFailure,
+          listener: (context, state) {
+            
+          },
+          builder: (context, state) {
+            if (state is AuthLoading) {
+              return CircularProgressIndicator();
+            }
+            return Column(
+              spacing: 16,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Spacer(),
+                const Text(
+                  'Create an account to get started',
+                  style: TextStyle(fontSize: 24),
+                ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 400),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      spacing: 16,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        _nameTextField(),
+                        _emailTextField(),
+                        _phoneNumberTextField(),
+                        _stayInHallDropdown(),
+                        if (stayInHall) ...[
+                          Row(
+                            spacing: 8,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: _hallDropdown(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: _roomNumberTextField(),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                    ],
-                    _passwordTextField(),
-                    _confirmPasswordTextField(),
-                    _signUpButton(context),
-                  ],
-                ),
-              ),
-            ),
-            Row(
-              spacing: 8,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Already have an account?'),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(SignInPage.route);
-                  },
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(decoration: TextDecoration.underline),
+                        _passwordTextField(),
+                        _confirmPasswordTextField(),
+                        _signUpButton(context),
+                      ],
+                    ),
                   ),
                 ),
+                Row(
+                  spacing: 8,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Already have an account?'),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(SignInPage.route);
+                      },
+                      child: const Text(
+                        'Sign In',
+                        style: TextStyle(decoration: TextDecoration.underline),
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
               ],
-            ),
-            Spacer(),
-          ],
+            );
+          },
         ),
       ),
     );
@@ -148,9 +160,7 @@ class _SignUpPageState extends State<SignUpPage> {
       decoration: const InputDecoration(labelText: 'Hall'),
       items: const [
         DropdownMenuItem(
-          value: 'Qudrat-e-Khuda Hall',
-          child: Text('Qudrat-e-Khuda Hall')
-        ),
+            value: 'Qudrat-e-Khuda Hall', child: Text('Qudrat-e-Khuda Hall')),
         DropdownMenuItem(
           value: 'Tareq Huda Hall',
           child: Text('Tareq Huda Hall'),

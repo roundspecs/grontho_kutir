@@ -1,13 +1,14 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:grontho_kutir/features/auth/data/models/user_model.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 abstract interface class AuthRepository {
-  Future<Either<Failure, String>> signInWithEmailAndPassword({
+  Future<Either<Failure, UserModel>> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
 
-  Future<Either<Failure, String>> singUpWithEmailAndPassword({
+  Future<Either<Failure, UserModel>> singUpWithEmailAndPassword({
     required String name,
     required String hallName,
     required String roomNumber,
