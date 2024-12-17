@@ -1,0 +1,31 @@
+name: Build and Release web
+on: push
+jobs:
+    hosting:
+      name: Deploy Website
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v3
+
+        - name: Set up Flutter
+          uses: subosito/flutter-action@v2
+          with:
+            channel: stable
+            flutter-version: 3.27.0
+        - run: flutter --version
+
+        # - name: Build Website
+        #   run: |
+        #     flutter config --enable-web
+        #     flutter pub get
+        #     flutter build web --release
+        #   working-directory: ./
+
+        # - name: Deploy Firebase Hosting
+        #   uses: w9jds/firebase-action@master
+        #   with:
+        #     args: deploy --only hosting:web-johannesmilke
+        #   env:
+        #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        # #     PROJECT_PATH: ./
