@@ -23,7 +23,7 @@ jobs:
           run: |
             flutter config --enable-web
             flutter pub get
-            flutter build web --release
+            flutter build web --release --dart-define-from-file=.env
           working-directory: ./
 
         - name: Deploy Firebase Hosting
