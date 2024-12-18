@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
@@ -32,8 +33,14 @@ class AuthRepositoryImpl implements AuthRepository {
         password: password,
       );
       return Right(response);
+    } on AuthException catch (e) {
+      return Left(Failure(e.message));
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    } on FormatException catch (e) {
+      return Left(Failure(e.message));
     } catch (e) {
-      return Left(Failure(e.toString()));
+      return Left(Failure());
     }
   }
 }

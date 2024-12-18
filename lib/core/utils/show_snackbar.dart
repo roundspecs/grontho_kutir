@@ -11,6 +11,8 @@ extension ShowSnackBar on BuildContext {
         SnackBar(
           content: Text(message),
           backgroundColor: isError ? Colors.red : Colors.green,
+          behavior: SnackBarBehavior.floating,
+          showCloseIcon: true,
         ),
       );
   }
