@@ -13,6 +13,11 @@ extension ShowSnackBar on BuildContext {
           backgroundColor: isError ? Colors.red : Colors.green,
           behavior: SnackBarBehavior.floating,
           showCloseIcon: true,
+          margin: EdgeInsets.only(
+            bottom: MediaQuery.of(this).size.height - 75,
+            left: 10,
+            right: 10,
+          ),
         ),
       );
   }

@@ -24,4 +24,8 @@ var theme = ThemeData(
       ),
     ),
   ),
+  snackBarTheme: SnackBarThemeData(
+    behavior: SnackBarBehavior.floating,
+    width: 500,
+  ),
 );
