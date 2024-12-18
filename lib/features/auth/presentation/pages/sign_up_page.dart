@@ -33,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
             buildWhen: (previous, current) => current is! AuthFailure,
             listenWhen: (previous, current) => current is AuthFailure,
             listener: (context, state) {
-              
+              context.showSnackBar(message: (state as AuthFailure).message);
             },
             builder: (context, state) {
               if (state is AuthLoading) {
