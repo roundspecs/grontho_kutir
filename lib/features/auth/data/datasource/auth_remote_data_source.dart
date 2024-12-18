@@ -1,5 +1,4 @@
-import 'package:grontho_kutir/core/core.dart';
-import 'package:grontho_kutir/features/auth/data/models/user_model.dart';
+import 'package:grontho_kutir/grontho_kutir.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {

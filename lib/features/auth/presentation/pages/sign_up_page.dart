@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grontho_kutir/core/validators/phone_number_validator.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 class SignUpPage extends StatefulWidget {

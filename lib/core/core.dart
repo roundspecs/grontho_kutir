@@ -1,10 +1,6 @@
 export 'error/error.dart';
 export 'theme/theme.dart';
-export 'validators/id_validator.dart';
-export 'validators/name_validator.dart';
-export 'validators/password_validator.dart';
-export 'validators/room_number_validator.dart';
-export 'validators/hall_name_validator.dart';
 export 'secrets/secrets.dart';
 export 'usecase/usecase.dart';
 export 'utils/utils.dart';
+export 'validators/validators.dart';
