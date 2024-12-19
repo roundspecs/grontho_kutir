@@ -15,5 +15,11 @@ Future<void> initDependencies() async {
     )
     ..registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(GetIt.I()))
     ..registerLazySingleton(() => SignUpUsecase(GetIt.I()))
-    ..registerLazySingleton(() => AuthBloc(signUpUsecase: GetIt.I()));
+    ..registerLazySingleton(() => SignInUsecase(GetIt.I()))
+    ..registerLazySingleton(
+      () => AuthBloc(
+        signUpUsecase: GetIt.I(),
+        signInUsecase: GetIt.I(),
+      ),
+    );
 }

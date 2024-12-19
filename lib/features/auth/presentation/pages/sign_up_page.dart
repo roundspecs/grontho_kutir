@@ -92,7 +92,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         },
                         child: const Text(
                           'Sign In',
-                          style: TextStyle(decoration: TextDecoration.underline),
+                          style:
+                              TextStyle(decoration: TextDecoration.underline),
                         ),
                       ),
                     ],
@@ -112,7 +113,7 @@ class _SignUpPageState extends State<SignUpPage> {
       onPressed: () {
         if (_formKey.currentState!.validate()) {
           context.read<AuthBloc>().add(
-                AuthSignUpWithEmailAndPassword(
+                AuthSignUpWithEmailAndPasswordEvent(
                   name: _nameController.text,
                   hallName: _hallNameController.text,
                   roomNumber: _roomNumberController.text,

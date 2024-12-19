@@ -10,8 +10,22 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, UserModel>> signInWithEmailAndPassword({
     required String email,
     required String password,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    try {
+      final response = await authRemoteDataSource.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return Right(response);
+    } on AuthException catch (e) {
+      return Left(Failure(e.message));
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    } on FormatException catch (e) {
+      return Left(Failure(e.message));
+    } catch (e) {
+      return Left(Failure());
+    }
   }
 
   @override

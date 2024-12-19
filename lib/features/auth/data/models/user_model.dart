@@ -20,4 +20,15 @@ class UserModel extends User {
       roomNumber: json['user_metadata']['room_number'],
     );
   }
+
+  @override
+  String toString() {
+    return 'UserModel('
+        'id: $id, '
+        'email: $email, '
+        'phoneNumber: $phoneNumber, '
+        'name: $name, '
+        'hallName: $hallName, '
+        'roomNumber: $roomNumber)';
+  }
 }
