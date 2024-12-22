@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 class SignInPage extends StatefulWidget {
-  static const route = '/sign-in';
+  static const path = '/sign-in';
   const SignInPage({super.key});
 
   @override
@@ -21,6 +23,12 @@ class _SignInPageState extends State<SignInPage> {
       color: Theme.of(context).colorScheme.primary,
       title: "Sign In - Grontho Kutir",
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await GetIt.I<AuthRepository>().getCurrentUserProfile();
+          },
+          child: const Icon(Icons.home),
+        ),
         body: Center(
           child: BlocConsumer<AuthBloc, AuthState>(
             buildWhen: (previous, current) => current is! AuthFailure,
@@ -62,9 +70,7 @@ class _SignInPageState extends State<SignInPage> {
                     children: [
                       const Text('Don\'t have an account?'),
                       InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(SignUpPage.route);
-                        },
+                        onTap: () => context.go(SignUpPage.path),
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(

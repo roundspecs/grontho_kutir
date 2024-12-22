@@ -2,6 +2,8 @@ import 'package:grontho_kutir/grontho_kutir.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
+  Session? get currentUserSession;
+
   Future<UserModel> signInWithEmailAndPassword({
     required String email,
     required String password,
@@ -15,6 +17,8 @@ abstract interface class AuthRemoteDataSource {
     required String phoneNumber,
     required String password,
   });
+
+  Future<UserModel?> getCurrentUserProfile();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -59,5 +63,27 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       throw ServerException("Failed to sign up");
     }
     return UserModel.fromJson(response.user!.toJson());
+  }
+
+  @override
+  Session? get currentUserSession => supabaseClient.auth.currentSession;
+
+  @override
+  Future<UserModel?> getCurrentUserProfile() async {
+    try {
+      if (currentUserSession == null) {
+        return null;
+      }
+      final userData = await supabaseClient
+          .from("profiles")
+          .select()
+          .eq("id", currentUserSession!.user.id);
+      return UserModel.fromDBJson(
+        data: userData.first,
+        email: currentUserSession!.user.email!,
+      );
+    } catch (e) {
+      throw ServerException("Failed to get current user profile");
+    }
   }
 }

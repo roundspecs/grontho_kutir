@@ -10,15 +10,29 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignUpUsecase _signUpUsecase;
   final SignInUsecase _signInUsecase;
-  AuthBloc({required SignUpUsecase signUpUsecase, required SignInUsecase signInUsecase})
-      : _signUpUsecase = signUpUsecase, _signInUsecase = signInUsecase,
+  final GetCurrentUserProfileUsecase _getCurrentUserProfileUsecase;
+  final AppUserCubit _appUserCubit;
+  AuthBloc({
+    required SignUpUsecase signUpUsecase,
+    required SignInUsecase signInUsecase,
+    required GetCurrentUserProfileUsecase getCurrentUserProfileUsecase,
+    required AppUserCubit appUserCubit,
+  })  : _signUpUsecase = signUpUsecase,
+        _signInUsecase = signInUsecase,
+        _getCurrentUserProfileUsecase = getCurrentUserProfileUsecase,
+        _appUserCubit = appUserCubit,
         super(AuthInitial()) {
-    on<AuthSignUpWithEmailAndPasswordEvent>(_onAuthSignUpWithEmailAndPasswordEvent);
-    on<AuthSignInWithEmailAndPasswordEvent>(_onAuthSignInWithEmailAndPasswordEvent);
+    on<AuthEvent>((_, emit) => emit(AuthLoading()));
+    on<AuthSignUpWithEmailAndPasswordEvent>(
+      _onAuthSignUpWithEmailAndPasswordEvent,
+    );
+    on<AuthSignInWithEmailAndPasswordEvent>(
+      _onAuthSignInWithEmailAndPasswordEvent,
+    );
+    on<AuthGetCurrentUserProfileEvent>(_onAuthGetCurrentUserProfileEvent);
   }
 
   FutureOr<void> _onAuthSignUpWithEmailAndPasswordEvent(event, emit) async {
-    emit(AuthLoading());
     final response = await _signUpUsecase(SignUpParams(
       name: event.name,
       hallName: event.hallName,
@@ -32,10 +46,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         debugPrint(failure.message);
         emit(AuthFailure(failure.message));
       },
-      (user) {
-        debugPrint("User created with id: ${user.id}");
-        emit(AuthSuccess(user));
-      },
+      (user) => _emitAuthSuccess(user: user, emit: emit),
     );
   }
 
@@ -43,7 +54,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSignInWithEmailAndPasswordEvent event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoading());
     final response = await _signInUsecase(SignInParams(
       email: event.email,
       password: event.password,
@@ -53,10 +63,36 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         debugPrint(failure.message);
         emit(AuthFailure(failure.message));
       },
-      (user) {
-        debugPrint("User signed in with id: ${user.id}");
-        emit(AuthSuccess(user));
-      },
+      (user) => _emitAuthSuccess(user: user, emit: emit),
     );
+  }
+
+  Future<void> _onAuthGetCurrentUserProfileEvent(
+    AuthGetCurrentUserProfileEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final response = await _getCurrentUserProfileUsecase(NoParams());
+    response.fold(
+      (failure) {
+        debugPrint(failure.message);
+        emit(AuthInitial());
+      },
+      (user) => _emitAuthSuccess(user: user, emit: emit),
+    );
+  }
+
+  Future<void> _emitAuthSuccess({
+    required User user,
+    required Emitter emit,
+  }) async {
+    debugPrint("User found with id: ${user.id}");
+    _appUserCubit.updateUser(user);
+    emit(AuthSuccess(user));
+  }
+
+  @override
+  void onTransition(Transition<AuthEvent, AuthState> transition) {
+    super.onTransition(transition);
+    debugPrint(transition.toString());
   }
 }

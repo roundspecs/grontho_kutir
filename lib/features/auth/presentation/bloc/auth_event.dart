@@ -1,7 +1,14 @@
 part of 'auth_bloc.dart';
 
 @immutable
-sealed class AuthEvent {}
+sealed class AuthEvent {
+  const AuthEvent();
+
+  @override
+  String toString() {
+    return runtimeType.toString();
+  }
+}
 
 class AuthSignUpWithEmailAndPasswordEvent extends AuthEvent {
   final String name;
@@ -11,7 +18,7 @@ class AuthSignUpWithEmailAndPasswordEvent extends AuthEvent {
   final String phoneNumber;
   final String password;
 
-  AuthSignUpWithEmailAndPasswordEvent({
+  const AuthSignUpWithEmailAndPasswordEvent({
     required this.name,
     required this.hallName,
     required this.roomNumber,
@@ -25,8 +32,12 @@ class AuthSignInWithEmailAndPasswordEvent extends AuthEvent {
   final String email;
   final String password;
 
-  AuthSignInWithEmailAndPasswordEvent({
+  const AuthSignInWithEmailAndPasswordEvent({
     required this.email,
     required this.password,
   });
+}
+
+class AuthGetCurrentUserProfileEvent extends AuthEvent {
+  const AuthGetCurrentUserProfileEvent();
 }

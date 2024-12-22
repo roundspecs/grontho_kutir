@@ -14,12 +14,17 @@ Future<void> initDependencies() async {
       () => AuthRemoteDataSourceImpl(GetIt.I()),
     )
     ..registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(GetIt.I()))
+    ..registerLazySingleton(() => AppUserCubit())
     ..registerLazySingleton(() => SignUpUsecase(GetIt.I()))
     ..registerLazySingleton(() => SignInUsecase(GetIt.I()))
+    ..registerLazySingleton(() => GetCurrentUserProfileUsecase(GetIt.I()))
     ..registerLazySingleton(
       () => AuthBloc(
         signUpUsecase: GetIt.I(),
         signInUsecase: GetIt.I(),
+        getCurrentUserProfileUsecase: GetIt.I(),
+        appUserCubit: GetIt.I(),
       ),
-    );
+    )
+    ..registerLazySingleton(() => Router(GetIt.I<AppUserCubit>()));
 }

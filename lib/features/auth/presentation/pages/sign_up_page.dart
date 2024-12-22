@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 class SignUpPage extends StatefulWidget {
-  static const route = '/sign-up';
+  static const path = '/sign-up';
   const SignUpPage({super.key});
 
   @override
@@ -87,13 +88,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       const Text('Already have an account?'),
                       InkWell(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(SignInPage.route);
-                        },
+                        onTap: () => context.go(SignInPage.path),
                         child: const Text(
                           'Sign In',
-                          style:
-                              TextStyle(decoration: TextDecoration.underline),
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
                       ),
                     ],

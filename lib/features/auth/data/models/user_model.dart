@@ -10,14 +10,28 @@ class UserModel extends User {
     required super.roomNumber,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) {
+  factory UserModel.fromJson(Map<String, dynamic> data) {
     return UserModel(
-      id: json['id'],
-      email: json['email'],
-      phoneNumber: json['user_metadata']['phone_number'],
-      name: json['user_metadata']['name'],
-      hallName: json['user_metadata']['hall_name'],
-      roomNumber: json['user_metadata']['room_number'],
+      id: data['id'],
+      email: data['email'],
+      phoneNumber: data['user_metadata']['phone_number'],
+      name: data['user_metadata']['name'],
+      hallName: data['user_metadata']['hall_name'],
+      roomNumber: data['user_metadata']['room_number'],
+    );
+  }
+
+  factory UserModel.fromDBJson({
+    required Map<String, dynamic> data,
+    required String email,
+  }) {
+    return UserModel(
+      id: data['id'],
+      email: email,
+      phoneNumber: data['phone_number'],
+      name: data['name'],
+      hallName: data['hall_name'],
+      roomNumber: data['room_number'],
     );
   }
 

@@ -1,11 +1,11 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
-class SignUpUsecase implements Usecase<UserModel, SignUpParams> {
+class SignUpUsecase implements Usecase<User, SignUpParams> {
   final AuthRepository authRepository;
   const SignUpUsecase(this.authRepository);
   @override
-  Future<Either<Failure, UserModel>> call(params) async {
+  Future<Either<Failure, User>> call(params) async {
     return await authRepository.singUpWithEmailAndPassword(
       name: params.name,
       hallName: params.hallName,
