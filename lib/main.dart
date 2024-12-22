@@ -9,38 +9,10 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => GetIt.I<AppUserCubit>(),
-        ),
-        BlocProvider(
-          create: (context) => GetIt.I<AuthBloc>(),
-        ),
+        BlocProvider(create: (_) => GetIt.I<AppUserCubit>()),
+        BlocProvider(create: (_) => GetIt.I<AuthBloc>()),
       ],
-      child: const MyApp(),
+      child: const App(),
     ),
   );
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<AuthBloc>().add(const AuthGetCurrentUserProfileEvent());
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Grontho Kutir',
-      theme: theme,
-      routerConfig: GetIt.I<Router>().config,
-    );
-  }
 }

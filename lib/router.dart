@@ -13,6 +13,7 @@ class Router {
       redirect: (context, state) {
         final isAuthenticated = _appUserCubit.state is AppUserSuccess;
         final isAuthPath = authPaths.contains(state.fullPath);
+
         if (isAuthenticated) {
           if (isAuthPath) {
             return '/';

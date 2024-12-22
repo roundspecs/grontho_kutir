@@ -11,21 +11,12 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    try {
-      final response = await authRemoteDataSource.signInWithEmailAndPassword(
+    return _handleErrors(() async {
+      return await authRemoteDataSource.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return Right(response);
-    } on AuthException catch (e) {
-      return Left(Failure(e.message));
-    } on ServerException catch (e) {
-      return Left(Failure(e.message));
-    } on FormatException catch (e) {
-      return Left(Failure(e.message));
-    } catch (e) {
-      return Left(Failure());
-    }
+    });
   }
 
   @override
@@ -37,8 +28,8 @@ class AuthRepositoryImpl implements AuthRepository {
     required String phoneNumber,
     required String password,
   }) async {
-    try {
-      final response = await authRemoteDataSource.singUpWithEmailAndPassword(
+    return _handleErrors(() async {
+      return await authRemoteDataSource.singUpWithEmailAndPassword(
         name: name,
         hallName: hallName,
         roomNumber: roomNumber,
@@ -46,26 +37,26 @@ class AuthRepositoryImpl implements AuthRepository {
         phoneNumber: phoneNumber,
         password: password,
       );
-      return Right(response);
-    } on AuthException catch (e) {
-      return Left(Failure(e.message));
-    } on ServerException catch (e) {
-      return Left(Failure(e.message));
-    } on FormatException catch (e) {
-      return Left(Failure(e.message));
-    } catch (e) {
-      return Left(Failure());
-    }
+    });
   }
 
   @override
   Future<Either<Failure, User>> getCurrentUserProfile() async {
-    try {
+    return _handleErrors(() async {
       final response = await authRemoteDataSource.getCurrentUserProfile();
       if (response == null) {
-        return Left(Failure("User not logged in"));
+        throw AuthException("User not logged in");
       }
-      return Right(response);
+      return response;
+    });
+  }
+
+  Future<Either<Failure, T>> _handleErrors<T>(
+    Future<T> Function() action,
+  ) async {
+    try {
+      final result = await action();
+      return Right(result);
     } on AuthException catch (e) {
       return Left(Failure(e.message));
     } on ServerException catch (e) {
