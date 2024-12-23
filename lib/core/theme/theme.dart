@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 var theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: Colors.deepPurple,
-    // brightness: Brightness.dark,
+    brightness: Brightness.dark,
   ),
   useMaterial3: true,
   inputDecorationTheme: const InputDecorationTheme(
@@ -27,5 +27,13 @@ var theme = ThemeData(
   snackBarTheme: SnackBarThemeData(
     behavior: SnackBarBehavior.floating,
     width: 500,
+  ),
+  appBarTheme: AppBarTheme(
+    elevation: 1,
+  ),
+  navigationDrawerTheme: NavigationDrawerThemeData(
+    indicatorShape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
   ),
 );

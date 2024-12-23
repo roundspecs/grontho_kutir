@@ -27,7 +27,7 @@ class Router {
         }
       },
       routes: [
-        ...coreRoutes,
+        ...homeRoutes,
         ...authRoutes,
       ],
     );
