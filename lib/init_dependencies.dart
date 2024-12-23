@@ -17,11 +17,13 @@ Future<void> initDependencies() async {
     ..registerLazySingleton(() => AppUserCubit())
     ..registerLazySingleton(() => SignUpUsecase(GetIt.I()))
     ..registerLazySingleton(() => SignInUsecase(GetIt.I()))
+    ..registerLazySingleton(() => SignOutUsecase(GetIt.I()))
     ..registerLazySingleton(() => GetCurrentUserProfileUsecase(GetIt.I()))
     ..registerLazySingleton(
       () => AuthBloc(
         signUpUsecase: GetIt.I(),
         signInUsecase: GetIt.I(),
+        signOutUsecase: GetIt.I(),
         getCurrentUserProfileUsecase: GetIt.I(),
         appUserCubit: GetIt.I(),
       ),

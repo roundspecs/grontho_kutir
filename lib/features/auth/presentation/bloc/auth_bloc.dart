@@ -10,15 +10,18 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SignUpUsecase _signUpUsecase;
   final SignInUsecase _signInUsecase;
+  final SignOutUsecase _signOutUsecase;
   final GetCurrentUserProfileUsecase _getCurrentUserProfileUsecase;
   final AppUserCubit _appUserCubit;
   AuthBloc({
     required SignUpUsecase signUpUsecase,
     required SignInUsecase signInUsecase,
+    required SignOutUsecase signOutUsecase,
     required GetCurrentUserProfileUsecase getCurrentUserProfileUsecase,
     required AppUserCubit appUserCubit,
   })  : _signUpUsecase = signUpUsecase,
         _signInUsecase = signInUsecase,
+        _signOutUsecase = signOutUsecase,
         _getCurrentUserProfileUsecase = getCurrentUserProfileUsecase,
         _appUserCubit = appUserCubit,
         super(AuthInitial()) {
@@ -29,6 +32,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthSignInWithEmailAndPasswordEvent>(
       _onAuthSignInWithEmailAndPasswordEvent,
     );
+    on<AuthSignOutEvent>(_onAuthSignOutEvent);
     on<AuthGetCurrentUserProfileEvent>(_onAuthGetCurrentUserProfileEvent);
   }
 
@@ -64,6 +68,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthFailure(failure.message));
       },
       (user) => _emitAuthSuccess(user: user, emit: emit),
+    );
+  }
+
+  Future<void> _onAuthSignOutEvent(
+    AuthSignOutEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final response = await _signOutUsecase(NoParams());
+    response.fold(
+      (failure) {
+        debugPrint(failure.message);
+        emit(AuthFailure(failure.message));
+      },
+      (_) {
+        _appUserCubit.updateUser(null);
+        emit(AuthInitial());
+      },
     );
   }
 

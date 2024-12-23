@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
@@ -33,7 +34,7 @@ class AppDrawer extends StatelessWidget {
       onDestinationSelected: (value) {
         context.pop();
         if (value == 4) {
-          // Logout
+          context.read<AuthBloc>().add(AuthSignOutEvent());
           return;
         }
         navigationShell.goBranch(value);

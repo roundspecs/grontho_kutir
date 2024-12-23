@@ -38,6 +38,8 @@ class AuthSignInWithEmailAndPasswordEvent extends AuthEvent {
   });
 }
 
+class AuthSignOutEvent extends AuthEvent {}
+
 class AuthGetCurrentUserProfileEvent extends AuthEvent {
   const AuthGetCurrentUserProfileEvent();
 }

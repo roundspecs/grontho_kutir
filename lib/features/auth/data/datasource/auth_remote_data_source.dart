@@ -19,6 +19,8 @@ abstract interface class AuthRemoteDataSource {
   });
 
   Future<UserModel?> getCurrentUserProfile();
+
+  Future<void> signOut();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -85,5 +87,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     } catch (e) {
       throw ServerException("Failed to get current user profile");
     }
+  }
+  
+  @override
+  Future<void> signOut() {
+    return supabaseClient.auth.signOut();
   }
 }
