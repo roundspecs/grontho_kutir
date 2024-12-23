@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:grontho_kutir/grontho_kutir.dart';
 
 class AppDrawer extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -11,25 +12,14 @@ class AppDrawer extends StatelessWidget {
       selectedIndex: navigationShell.currentIndex,
       children: [
         SizedBox(height: 20),
-        NavigationDrawerDestination(
-          label: Text('Books'),
-          icon: Icon(Icons.library_books_outlined),
-          selectedIcon: Icon(Icons.library_books_rounded),
-        ),
-        NavigationDrawerDestination(
-          label: Text('Users'),
-          icon: Icon(Icons.person_outline),
-          selectedIcon: Icon(Icons.person_rounded),
-        ),
-        NavigationDrawerDestination(
-          label: Text('Issues'),
-          icon: Icon(Icons.receipt_long_rounded),
-          selectedIcon: Icon(Icons.receipt_long),
-        ),
-        NavigationDrawerDestination(
-          label: Text('Settings'),
-          icon: Icon(Icons.settings_outlined),
-          selectedIcon: Icon(Icons.settings_rounded),
+        ...destinations.map(
+          (desitination) {
+            return NavigationDrawerDestination(
+              label: Text(desitination.label),
+              icon: Icon(desitination.icon),
+              selectedIcon: Icon(desitination.selectedIcon),
+            );
+          },
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
