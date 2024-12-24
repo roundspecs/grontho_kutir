@@ -20,7 +20,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Title(
       color: Theme.of(context).colorScheme.primary,
-      title: 'Sign In - Grontho Kutir',
+      title: 'Sign In - গ্রন্থকুটির',
       child: Scaffold(
         body: Center(
           child: BlocConsumer<AuthBloc, AuthState>(

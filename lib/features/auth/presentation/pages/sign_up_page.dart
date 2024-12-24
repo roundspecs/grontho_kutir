@@ -26,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Title(
       color: Theme.of(context).colorScheme.primary,
-      title: 'Sign Up - Grontho Kutir',
+      title: 'Sign Up - গ্রন্থকুটির',
       child: Scaffold(
         body: Center(
           child: BlocConsumer<AuthBloc, AuthState>(

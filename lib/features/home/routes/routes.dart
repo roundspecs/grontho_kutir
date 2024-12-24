@@ -26,7 +26,13 @@ final destinations = [
     icon: Icons.library_books_outlined,
     selectedIcon: Icons.library_books_rounded,
     pageBuilder: (context, state) {
-      return MaterialPage(child: BookListPage());
+      return MaterialPage(
+        child: Title(
+          color: Theme.of(context).colorScheme.primary,
+          title: 'Books - গ্রন্থকুটির',
+          child: BookListPage(),
+        ),
+      );
     },
   ),
   Destination(
@@ -35,7 +41,13 @@ final destinations = [
     icon: Icons.person_outline,
     selectedIcon: Icons.person_rounded,
     pageBuilder: (context, state) {
-      return MaterialPage(child: Center(child: Text('Users')));
+      return MaterialPage(
+        child: Title(
+          color: Theme.of(context).colorScheme.primary,
+          title: 'Users - গ্রন্থকুটির',
+          child: Center(child: Text('Users')),
+        ),
+      );
     },
   ),
   Destination(
@@ -44,7 +56,13 @@ final destinations = [
     icon: Icons.receipt_long_rounded,
     selectedIcon: Icons.receipt_long,
     pageBuilder: (context, state) {
-      return MaterialPage(child: Center(child: Text('Issues')));
+      return MaterialPage(
+        child: Title(
+          color: Theme.of(context).colorScheme.primary,
+          title: 'Issues - গ্রন্থকুটির',
+          child: Center(child: Text('Issues')),
+        ),
+      );
     },
   ),
   Destination(
@@ -53,7 +71,13 @@ final destinations = [
     icon: Icons.settings_outlined,
     selectedIcon: Icons.settings_rounded,
     pageBuilder: (context, state) {
-      return MaterialPage(child: Center(child: Text('Settings')));
+      return MaterialPage(
+        child: Title(
+          color: Theme.of(context).colorScheme.primary,
+          title: 'Settings - গ্রন্থকুটির',
+          child: Center(child: Text('Settings')),
+        ),
+      );
     },
   ),
 ];
