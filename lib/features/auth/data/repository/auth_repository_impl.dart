@@ -45,7 +45,7 @@ class AuthRepositoryImpl implements AuthRepository {
     return _handleErrors(() async {
       final response = await authRemoteDataSource.getCurrentUserProfile();
       if (response == null) {
-        throw AuthException("User not logged in");
+        throw AuthException('User not logged in');
       }
       return response;
     });
@@ -67,7 +67,7 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(Failure());
     }
   }
-  
+
   @override
   Future<Either<Failure, void>> signOut() {
     return _handleErrors(() async {

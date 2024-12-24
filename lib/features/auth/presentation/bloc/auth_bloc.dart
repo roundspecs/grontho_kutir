@@ -106,7 +106,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required User user,
     required Emitter emit,
   }) async {
-    debugPrint("User found with id: ${user.id}");
+    debugPrint('User found with id: ${user.id}');
     _appUserCubit.updateUser(user);
     emit(AuthSuccess(user));
   }

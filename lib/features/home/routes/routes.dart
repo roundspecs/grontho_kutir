@@ -8,44 +8,53 @@ class Destination {
   final String label;
   final IconData icon;
   final IconData? selectedIcon;
-  final Widget page;
+  final Page Function(BuildContext, GoRouterState)? pageBuilder;
+
   const Destination({
     required this.path,
     required this.label,
     required this.icon,
-    required this.page,
+    required this.pageBuilder,
     this.selectedIcon,
   });
 }
 
 final destinations = [
   Destination(
-    path: "/",
-    label: "Books",
+    path: BookListPage.path,
+    label: 'Books',
     icon: Icons.library_books_outlined,
     selectedIcon: Icons.library_books_rounded,
-    page: BookListPage(),
+    pageBuilder: (context, state) {
+      return MaterialPage(child: BookListPage());
+    },
   ),
   Destination(
-    path: "/users",
-    label: "Users",
+    path: '/users',
+    label: 'Users',
     icon: Icons.person_outline,
     selectedIcon: Icons.person_rounded,
-    page: Center(child: Text('Users')),
+    pageBuilder: (context, state) {
+      return MaterialPage(child: Center(child: Text('Users')));
+    },
   ),
   Destination(
-    path: "/issues",
-    label: "Issues",
+    path: '/issues',
+    label: 'Issues',
     icon: Icons.receipt_long_rounded,
     selectedIcon: Icons.receipt_long,
-    page: Center(child: Text('Issues')),
+    pageBuilder: (context, state) {
+      return MaterialPage(child: Center(child: Text('Issues')));
+    },
   ),
   Destination(
-    path: "/settings",
-    label: "Settings",
+    path: '/settings',
+    label: 'Settings',
     icon: Icons.settings_outlined,
     selectedIcon: Icons.settings_rounded,
-    page: Center(child: Text('Settings')),
+    pageBuilder: (context, state) {
+      return MaterialPage(child: Center(child: Text('Settings')));
+    },
   ),
 ];
 
@@ -57,12 +66,25 @@ final homeRoutes = [
     branches: [
       ...destinations.map((destination) {
         return StatefulShellBranch(routes: [
-          GoRoute(
-            path: destination.path,
-            pageBuilder: (context, state) {
-              return MaterialPage(child: destination.page);
-            },
-          ),
+          if (destination.path == BookListPage.path)
+            GoRoute(
+              path: destination.path,
+              pageBuilder: destination.pageBuilder,
+              routes: [
+                GoRoute(
+                  path: ':bookId',
+                  builder: (context, state) {
+                    final bookId = state.pathParameters['bookId']!;
+                    return BookDetailsPage(bookId: bookId);
+                  },
+                ),
+              ],
+            )
+          else
+            GoRoute(
+              path: destination.path,
+              pageBuilder: destination.pageBuilder,
+            ),
         ]);
       }),
     ],

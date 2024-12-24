@@ -20,7 +20,7 @@ class _SignInPageState extends State<SignInPage> {
   Widget build(BuildContext context) {
     return Title(
       color: Theme.of(context).colorScheme.primary,
-      title: "Sign In - Grontho Kutir",
+      title: 'Sign In - Grontho Kutir',
       child: Scaffold(
         body: Center(
           child: BlocConsumer<AuthBloc, AuthState>(
@@ -104,8 +104,8 @@ class _SignInPageState extends State<SignInPage> {
       controller: _idController,
       decoration: const InputDecoration(
         labelText: 'Email',
-        prefixText: "u",
-        suffixText: "@student.cuet.ac.bd",
+        prefixText: 'u',
+        suffixText: '@student.cuet.ac.bd',
       ),
       validator: idValidator,
       keyboardType: TextInputType.number,

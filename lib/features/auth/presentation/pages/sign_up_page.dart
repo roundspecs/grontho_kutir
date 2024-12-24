@@ -26,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Title(
       color: Theme.of(context).colorScheme.primary,
-      title: "Sign Up - Grontho Kutir",
+      title: 'Sign Up - Grontho Kutir',
       child: Scaffold(
         body: Center(
           child: BlocConsumer<AuthBloc, AuthState>(
@@ -118,7 +118,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   hallName: _hallNameController.text,
                   roomNumber: _roomNumberController.text,
                   email: idToEmail(_idController.text),
-                  phoneNumber: "+880${_phoneNumberController.text}",
+                  phoneNumber: '+880${_phoneNumberController.text}',
                   password: _passwordController.text,
                 ),
               );
@@ -204,7 +204,7 @@ class _SignUpPageState extends State<SignUpPage> {
       controller: _phoneNumberController,
       decoration: const InputDecoration(
         labelText: 'Phone Number',
-        prefixText: "+880",
+        prefixText: '+880',
       ),
       validator: phoneNumberValidator,
       keyboardType: TextInputType.number,
@@ -216,8 +216,8 @@ class _SignUpPageState extends State<SignUpPage> {
       controller: _idController,
       decoration: const InputDecoration(
         labelText: 'Email',
-        prefixText: "u",
-        suffixText: "@student.cuet.ac.bd",
+        prefixText: 'u',
+        suffixText: '@student.cuet.ac.bd',
       ),
       validator: idValidator,
       keyboardType: TextInputType.number,

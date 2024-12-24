@@ -36,4 +36,12 @@ var theme = ThemeData(
       borderRadius: BorderRadius.circular(10),
     ),
   ),
+  searchBarTheme: SearchBarThemeData(
+    elevation: WidgetStateProperty.all(0),
+    shape: WidgetStateProperty.all(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    ),
+  ),
 );

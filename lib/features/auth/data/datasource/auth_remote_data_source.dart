@@ -37,7 +37,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       password: password,
     );
     if (response.user == null) {
-      throw ServerException("Failed to sign in");
+      throw ServerException('Failed to sign in');
     }
     return UserModel.fromJson(response.user!.toJson());
   }
@@ -55,14 +55,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       email: email,
       password: password,
       data: {
-        "name": name,
-        "hall_name": hallName,
-        "room_number": roomNumber,
-        "phone_number": phoneNumber,
+        'name': name,
+        'hall_name': hallName,
+        'room_number': roomNumber,
+        'phone_number': phoneNumber,
       },
     );
     if (response.user == null) {
-      throw ServerException("Failed to sign up");
+      throw ServerException('Failed to sign up');
     }
     return UserModel.fromJson(response.user!.toJson());
   }
@@ -77,18 +77,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         return null;
       }
       final userData = await supabaseClient
-          .from("profiles")
+          .from('profiles')
           .select()
-          .eq("id", currentUserSession!.user.id);
+          .eq('id', currentUserSession!.user.id);
       return UserModel.fromDBJson(
         data: userData.first,
         email: currentUserSession!.user.email!,
       );
     } catch (e) {
-      throw ServerException("Failed to get current user profile");
+      throw ServerException('Failed to get current user profile');
     }
   }
-  
+
   @override
   Future<void> signOut() {
     return supabaseClient.auth.signOut();

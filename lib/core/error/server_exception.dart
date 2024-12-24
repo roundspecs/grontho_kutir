@@ -5,6 +5,6 @@ class ServerException {
 
   @override
   String toString() {
-    return "Server Exception: $message";
+    return 'Server Exception: $message';
   }
 }

@@ -1,3 +1,3 @@
 String idToEmail(String id) {
-  return "u$id@student.cuet.ac.bd";
+  return 'u$id@student.cuet.ac.bd';
 }
