@@ -1,11 +1,11 @@
 {
-    "name": "grontho_kutir",
-    "short_name": "grontho_kutir",
+    "name": "গ্রন্থকুটির",
+    "short_name": "গ্রন্থকুটির",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "শিক্ষার্থীদের দ্বারা পরিচালিত ক্যাম্পাসভিত্তিক পাঠাগার",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
