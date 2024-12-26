@@ -49,42 +49,45 @@ class _BookListViewState extends State<BookListView> {
       }
       final books = context.select(
           (BookListCubit cubit) => (cubit.state as BookListLoaded).books);
-      return DataTable(
-        columns: [
-          DataColumn(label: Text('ID')),
-          DataColumn(label: Text('Title')),
-          DataColumn(label: Text('Author')),
-          DataColumn(label: Text('Count'), numeric: true),
-          DataColumn(label: Text('Category')),
-        ],
-        rows: [
-          ...books.map(
-            (e) {
-              return DataRow(
-                cells: [
-                  DataCell(
-                    Text(
-                      e.id.toString(),
-                      style: TextStyle(fontWeight: FontWeight.bold),
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: DataTable(
+          columns: [
+            DataColumn(label: Text('ID')),
+            DataColumn(label: Text('Title')),
+            DataColumn(label: Text('Author')),
+            DataColumn(label: Text('Count'), numeric: true),
+            DataColumn(label: Text('Category')),
+          ],
+          rows: [
+            ...books.map(
+              (e) {
+                return DataRow(
+                  cells: [
+                    DataCell(
+                      Text(
+                        e.id.toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  DataCell(InkWell(
-                    child: Text(
-                      e.title,
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    onTap: () {
-                      context.go('${BookListPage.path}/${e.id}');
-                    },
-                  )),
-                  DataCell(Text(e.author)),
-                  DataCell(Text(e.copiesCount.toString())),
-                  DataCell(Text(e.category.name)),
-                ],
-              );
-            },
-          ),
-        ],
+                    DataCell(InkWell(
+                      child: Text(
+                        e.title,
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onTap: () {
+                        context.go('${BookListPage.path}/${e.id}');
+                      },
+                    )),
+                    DataCell(Text(e.author)),
+                    DataCell(Text(e.copiesCount.toString())),
+                    DataCell(Text(e.category.name)),
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       );
     });
   }
