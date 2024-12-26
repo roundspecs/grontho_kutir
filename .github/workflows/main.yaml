@@ -1,5 +1,8 @@
 name: Build and Release web
-on: push
+on:
+  push:
+    branches:
+      - main
 jobs:
     hosting:
       name: Deploy Website
