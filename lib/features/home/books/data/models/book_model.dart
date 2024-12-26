@@ -15,8 +15,16 @@ class BookModel extends Book {
       title: json['title'],
       author: json['author'],
       category: Category.fromString(json['category']),
-      copiesCount: json['copies'][0]['count'] ?? 0,
+      copiesCount: _getCopiesCount(json),
     );
+  }
+
+  static int _getCopiesCount(Map<String, dynamic> json) {
+    try {
+      return json['copies'][0]['count'] ?? 0;
+    } catch (e) {
+      return 0;
+    }
   }
 
   Map<String, dynamic> toJson() {
