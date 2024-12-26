@@ -42,8 +42,7 @@ class _SignInPageState extends State<SignInPage> {
                     'Welcome back!',
                     style: TextStyle(fontSize: 24),
                   ),
-                  ConstrainedBox(
-                    constraints: BoxConstraints(maxWidth: 400),
+                  LimitWidth(
                     child: Form(
                       key: _formKey,
                       child: Column(

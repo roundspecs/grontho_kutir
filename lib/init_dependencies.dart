@@ -28,5 +28,11 @@ Future<void> initDependencies() async {
         appUserCubit: GetIt.I(),
       ),
     )
-    ..registerLazySingleton(() => Router(GetIt.I<AppUserCubit>()));
+    ..registerLazySingleton(() => Router(GetIt.I<AppUserCubit>()))
+    ..registerLazySingleton<BookDataSource>(() => BookDataSourceImpl(GetIt.I()))
+    ..registerLazySingleton<BookRepository>(() => BookRepositoryImpl(GetIt.I()))
+    ..registerLazySingleton(() => FetchBooksUsecase(GetIt.I()))
+    ..registerLazySingleton(() => AddBookUsecase(GetIt.I()))
+    ..registerLazySingleton(() => BookListCubit(fetchBooksUsecase: GetIt.I()))
+    ..registerFactory(() => AddBookCubit(addBookUsecase: GetIt.I()));
 }

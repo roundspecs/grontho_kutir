@@ -22,7 +22,7 @@ class _AppState extends State<App> {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Grontho Kutir',
-      theme: theme,
+      theme: theme(context),
       routerConfig: GetIt.I<Router>().config,
     );
   }

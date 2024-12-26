@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:grontho_kutir/features/home/presentation/pages/app_scaffold.dart';
+import 'package:grontho_kutir/features/home/books/presentation/pages/add_book_page/add_book_page.dart';
+import 'package:grontho_kutir/features/home/books/presentation/pages/app_scaffold.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 class Destination {
@@ -95,6 +96,18 @@ final homeRoutes = [
               path: destination.path,
               pageBuilder: destination.pageBuilder,
               routes: [
+                GoRoute(
+                  path: AddBookPage.path,
+                  pageBuilder: (context, state) {
+                    return MaterialPage(
+                      child: Title(
+                        color: Theme.of(context).colorScheme.primary,
+                        title: 'Add Book - গ্রন্থকুটির',
+                        child: AddBookPage(),
+                      ),
+                    );
+                  },
+                ),
                 GoRoute(
                   path: ':bookId',
                   builder: (context, state) {
