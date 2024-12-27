@@ -14,8 +14,9 @@ class CopiesDataSourceImpl implements CopiesDataSource {
   Future<List<CopyModel>> fetchCopies(String bookId) async {
     final response = await _supabaseClient
         .from('copies')
-        .select(
-            '*, book:books(*), owner:owner_id(*), representative:representative_id(*)')
+        .select('*, book:books(*), '
+            'owner:owner_id(*), '
+            'representative:representative_id(*)')
         .eq('book_id', bookId);
     return response.map((e) => CopyModel.fromJson(e)).toList();
   }

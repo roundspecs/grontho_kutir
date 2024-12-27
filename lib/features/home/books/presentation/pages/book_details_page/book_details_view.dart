@@ -43,6 +43,12 @@ class BookDetailsView extends StatelessWidget {
                   book.author,
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    context.go('/books/${book.id}/add');
+                  },
+                  child: Text('Add New Copy'),
+                ),
               ],
             ),
             Text(

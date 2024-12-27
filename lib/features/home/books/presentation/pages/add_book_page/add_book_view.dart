@@ -73,6 +73,7 @@ class _AddBookViewState extends State<AddBookView> {
                       author: _authorController.text,
                       category: _selectedCategory,
                     );
+                context.pop();
               }
             },
           ),
@@ -119,6 +120,7 @@ class _AddBookViewState extends State<AddBookView> {
 
   TextFormField _authorTextField() {
     return TextFormField(
+      validator: authorNameValidator,
       controller: _authorController,
       decoration: const InputDecoration(
         labelText: 'Author',
@@ -128,6 +130,7 @@ class _AddBookViewState extends State<AddBookView> {
 
   TextFormField _titleTextField() {
     return TextFormField(
+      validator: bookTitleValidator,
       controller: _titleController,
       maxLines: null,
       decoration: const InputDecoration(

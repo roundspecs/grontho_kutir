@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:grontho_kutir/features/home/books/presentation/pages/add_book_page/add_book_page.dart';
-import 'package:grontho_kutir/features/home/books/presentation/pages/app_scaffold.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 class Destination {
@@ -114,6 +112,21 @@ final homeRoutes = [
                     final bookId = state.pathParameters['bookId']!;
                     return BookDetailsPage(bookId: bookId);
                   },
+                  routes: [
+                    GoRoute(
+                      path: AddCopyPage.path,
+                      pageBuilder: (context, state) {
+                        final bookId = state.pathParameters['bookId']!;
+                        return MaterialPage(
+                          child: Title(
+                            color: Theme.of(context).colorScheme.primary,
+                            title: 'Add Copy - গ্রন্থকুটির',
+                            child: AddCopyPage(bookId),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             )
