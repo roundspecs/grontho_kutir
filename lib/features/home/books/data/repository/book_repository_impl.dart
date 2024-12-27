@@ -71,4 +71,11 @@ class BookRepositoryImpl implements BookRepository {
       return Left(Failure());
     }
   }
+
+  @override
+  Future<Either<Failure, Book>> fetchBookById(String id) {
+    return _handleErrors(() async {
+      return await _bookDataSource.fetchBookById(id);
+    });
+  }
 }

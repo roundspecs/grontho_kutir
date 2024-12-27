@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:grontho_kutir/features/home/books/data/repository/copies_repository_impl.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -31,8 +32,16 @@ Future<void> initDependencies() async {
     ..registerLazySingleton(() => Router(GetIt.I<AppUserCubit>()))
     ..registerLazySingleton<BookDataSource>(() => BookDataSourceImpl(GetIt.I()))
     ..registerLazySingleton<BookRepository>(() => BookRepositoryImpl(GetIt.I()))
+    ..registerLazySingleton<CopiesDataSource>(
+      () => CopiesDataSourceImpl(GetIt.I()),
+    )
+    ..registerLazySingleton<CopiesRepository>(
+      () => CopiesRepositoryImpl(GetIt.I()),
+    )
     ..registerLazySingleton(() => FetchBooksUsecase(GetIt.I()))
     ..registerLazySingleton(() => AddBookUsecase(GetIt.I()))
+    ..registerLazySingleton(() => FetchCopiesUsecase(GetIt.I()))
+    ..registerLazySingleton(() => FetchBookByIdUsecase(GetIt.I()))
     ..registerLazySingleton(() => BookListCubit(fetchBooksUsecase: GetIt.I()))
     ..registerFactory(() => AddBookCubit(addBookUsecase: GetIt.I()));
 }

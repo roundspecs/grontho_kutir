@@ -35,6 +35,17 @@ class UserModel extends User {
     );
   }
 
+  factory UserModel.fromMap(Map<String, dynamic> data) {
+    return UserModel(
+      id: data['id'],
+      email: data['email'] ?? '-',
+      phoneNumber: data['phone_number'],
+      name: data['name'],
+      hallName: data['hall_name'],
+      roomNumber: data['room_number'],
+    );
+  }
+
   @override
   String toString() {
     return 'UserModel('

@@ -25,6 +25,8 @@ abstract interface class BookDataSource {
   Future<void> deleteBook({
     required String id,
   });
+
+  Future<Book> fetchBookById(String id);
 }
 
 class BookDataSourceImpl implements BookDataSource {
@@ -88,5 +90,12 @@ class BookDataSourceImpl implements BookDataSource {
   }) {
     // TODO: implement updateBook
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Book> fetchBookById(String id) async {
+    final response =
+        await _supabaseClient.from('books').select().eq('id', id).single();
+    return BookModel.fromJson(response);
   }
 }

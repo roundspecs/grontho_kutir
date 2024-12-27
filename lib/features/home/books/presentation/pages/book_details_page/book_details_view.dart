@@ -5,35 +5,71 @@ class BookDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColumnWithSpacing(
-      children: [
-        Text(
-          'Copies of Book ${1}',
-          style: Theme.of(context).textTheme.displaySmall,
-        ),
-        DataTable(
-          columns: [
-            DataColumn(label: Text('ID')),
-            DataColumn(label: Text('Condition')),
-            DataColumn(label: Text('Owner')),
-            DataColumn(label: Text('Representative')),
+    return BlocConsumer<BookDetailsCubit, BookDetailsState>(
+      listener: (context, state) {
+        if (state is BookDetailsError) {
+          context.showSnackBar(message: state.message, isError: true);
+        }
+      },
+      builder: (context, state) {
+        if (state is BookDetailsLoading) {
+          return Center(child: CircularProgressIndicator());
+        }
+
+        state as BookDetailsLoaded;
+        final book = state.book;
+        final copies = state.copies;
+
+        return ColumnWithSpacing(
+          children: [
+            Column(
+              spacing: 8,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 8,
+                  children: [
+                    Text(
+                      book.title,
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                    Chip(
+                      label: Text(book.category.name),
+                      padding: EdgeInsets.symmetric(horizontal: 2),
+                    ),
+                  ],
+                ),
+                Text(
+                  book.author,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ],
+            ),
+            Text(
+              'Copies of Book #${book.id}',
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+            DataTable(
+              columns: [
+                DataColumn(label: Text('ID')),
+                DataColumn(label: Text('Condition')),
+                DataColumn(label: Text('Owner')),
+                DataColumn(label: Text('Representative')),
+              ],
+              rows: [
+                ...copies.map((e) {
+                  return DataRow(cells: [
+                    DataCell(Text(e.id.toString())),
+                    DataCell(Text(e.condition)),
+                    DataCell(Text(e.owner.name)),
+                    DataCell(Text(e.representative.name)),
+                  ]);
+                }),
+              ],
+            ),
           ],
-          rows: [
-            DataRow(cells: [
-              DataCell(Text('1')),
-              DataCell(Text('Some pages are missing')),
-              DataCell(Text('John Doe')),
-              DataCell(Text('Jane Doe')),
-            ]),
-            DataRow(cells: [
-              DataCell(Text('2')),
-              DataCell(Text('Intact')),
-              DataCell(Text('Jane Doe')),
-              DataCell(Text('John Doe')),
-            ]),
-          ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

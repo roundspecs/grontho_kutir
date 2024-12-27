@@ -25,4 +25,6 @@ abstract interface class BookRepository {
   Future<Either<Failure, void>> deleteBook({
     required String id,
   });
+
+  Future<Either<Failure, Book>> fetchBookById(String id);
 }
