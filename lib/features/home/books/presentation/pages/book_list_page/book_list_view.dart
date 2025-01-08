@@ -19,19 +19,21 @@ class _BookListViewState extends State<BookListView> {
 
   @override
   Widget build(BuildContext context) {
-    return ColumnWithSpacing(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          spacing: 8,
-          children: [
-            Expanded(child: _searchBar(context)),
-            _addBookButton(context),
-          ],
-        ),
-        _categoryFilter(context),
-        _bookTable(context),
-      ],
+    return SingleChildScrollView(
+      child: ColumnWithSpacing(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 8,
+            children: [
+              Expanded(child: _searchBar(context)),
+              _addBookButton(context),
+            ],
+          ),
+          _categoryFilter(context),
+          _bookTable(context),
+        ],
+      ),
     );
   }
 
