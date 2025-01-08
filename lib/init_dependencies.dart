@@ -15,6 +15,7 @@ Future<void> initDependencies() async {
 
   GetIt.I
     ..registerLazySingleton(() => supabase.client)
+    // Auth
     ..registerLazySingleton<AuthRemoteDataSource>(
       () => AuthRemoteDataSourceImpl(GetIt.I()),
     )
@@ -33,27 +34,31 @@ Future<void> initDependencies() async {
         appUserCubit: GetIt.I(),
       ),
     )
+    // Router
     ..registerLazySingleton(() => Router(GetIt.I<AppUserCubit>()))
+    // Books
     ..registerLazySingleton<BookDataSource>(() => BookDataSourceImpl(GetIt.I()))
     ..registerLazySingleton<BookRepository>(() => BookRepositoryImpl(GetIt.I()))
+    ..registerLazySingleton(() => FetchBooksUsecase(GetIt.I()))
+    ..registerLazySingleton(() => AddBookUsecase(GetIt.I()))
+    ..registerLazySingleton(() => FetchBookByIdUsecase(GetIt.I()))
+    ..registerLazySingleton(() => BookListCubit(fetchBooksUsecase: GetIt.I()))
+    ..registerFactory(() => AddBookCubit(addBookUsecase: GetIt.I()))
+    // Copies
     ..registerLazySingleton<CopiesDataSource>(
       () => CopiesDataSourceImpl(GetIt.I()),
     )
     ..registerLazySingleton<CopiesRepository>(
       () => CopiesRepositoryImpl(GetIt.I()),
     )
+    ..registerLazySingleton(() => AddCopyUsecase(GetIt.I()))
+    ..registerLazySingleton(() => FetchCopiesUsecase(GetIt.I()))
+    // Profile
     ..registerLazySingleton<ProfileDataSource>(
       () => ProfileDataSourceImpl(GetIt.I()),
     )
     ..registerLazySingleton<ProfileRepository>(
       () => ProfileRepositoryImpl(GetIt.I()),
     )
-    ..registerLazySingleton(() => FetchBooksUsecase(GetIt.I()))
-    ..registerLazySingleton(() => AddBookUsecase(GetIt.I()))
-    ..registerLazySingleton(() => FetchCopiesUsecase(GetIt.I()))
-    ..registerLazySingleton(() => FetchProfileByStudentId(GetIt.I()))
-    ..registerLazySingleton(() => AddCopyUsecase(GetIt.I()))
-    ..registerLazySingleton(() => FetchBookByIdUsecase(GetIt.I()))
-    ..registerLazySingleton(() => BookListCubit(fetchBooksUsecase: GetIt.I()))
-    ..registerFactory(() => AddBookCubit(addBookUsecase: GetIt.I()));
+    ..registerLazySingleton(() => FetchProfileByStudentId(GetIt.I()));
 }
