@@ -1,9 +1,10 @@
 import 'package:get_it/get_it.dart';
+import 'package:grontho_kutir/data/repository/profile_repository_impl.dart';
+import 'package:grontho_kutir/domain/repository/profile_repository.dart';
+import 'package:grontho_kutir/domain/usecases/fetch_profile_by_student_id.dart';
+import 'package:grontho_kutir/domain/usecases/fetch_profiles_usecase.dart';
 import 'package:grontho_kutir/features/home/books/data/repository/copies_repository_impl.dart';
-import 'package:grontho_kutir/features/home/books/data/repository/profile_repository_impl.dart';
-import 'package:grontho_kutir/features/home/books/domain/repository/profile_repository.dart';
 import 'package:grontho_kutir/features/home/books/domain/usecases/add_copy_usecase.dart';
-import 'package:grontho_kutir/features/home/books/domain/usecases/fetch_profile_by_student_id.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -60,5 +61,6 @@ Future<void> initDependencies() async {
     ..registerLazySingleton<ProfileRepository>(
       () => ProfileRepositoryImpl(GetIt.I()),
     )
-    ..registerLazySingleton(() => FetchProfileByStudentId(GetIt.I()));
+    ..registerLazySingleton(() => FetchProfileByStudentIdUsecase(GetIt.I()))
+    ..registerLazySingleton(() => FetchProfilesUsecase(GetIt.I()));
 }

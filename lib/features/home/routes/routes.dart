@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:grontho_kutir/features/home/core/widgets/app_scaffold.dart';
+import 'package:grontho_kutir/features/home/users/presentation/pages/users_page.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 class Destination {
@@ -44,7 +46,7 @@ final destinations = [
         child: Title(
           color: Theme.of(context).colorScheme.primary,
           title: 'Users - গ্রন্থকুটির',
-          child: Center(child: Text('Users')),
+          child: UsersPage(),
         ),
       );
     },

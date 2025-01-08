@@ -1,5 +1,5 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:grontho_kutir/features/home/books/domain/repository/profile_repository.dart';
+import 'package:grontho_kutir/domain/repository/profile_repository.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -9,12 +9,20 @@ class ProfileRepositoryImpl implements ProfileRepository {
       : _profileDataSource = profileDataSource;
 
   @override
-  Future<Either<Failure, Profile?>> getProfileByStudentId(String id) {
+  Future<Either<Failure, Profile?>> fetchProfileByStudentId(String id) {
     return _handleErrors(() async {
-      final profile = await _profileDataSource.getProfileByEmail(
+      final profile = await _profileDataSource.fetchProfileByEmail(
         'u$id@student.cuet.ac.bd',
       );
       return profile;
+    });
+  }
+
+  @override
+  Future<Either<Failure, List<Profile>>> fetchProfiles(
+      {required String searchQuery}) {
+    return _handleErrors(() async {
+      return await _profileDataSource.fetchProfiles(searchQuery: searchQuery);
     });
   }
 

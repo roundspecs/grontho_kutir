@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grontho_kutir/domain/usecases/fetch_profile_by_student_id.dart';
 import 'package:grontho_kutir/features/home/books/domain/usecases/add_copy_usecase.dart';
-import 'package:grontho_kutir/features/home/books/domain/usecases/fetch_profile_by_student_id.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
 part 'add_copy_state.dart';
 
 class AddCopyCubit extends Cubit<AddCopyState> {
-  final FetchProfileByStudentId _fetchProfileByStudentId;
+  final FetchProfileByStudentIdUsecase _fetchProfileByStudentId;
   final AddCopyUsecase _addCopyUsecase;
   AddCopyCubit({
-    required FetchProfileByStudentId fetchProfileByStudentId,
+    required FetchProfileByStudentIdUsecase fetchProfileByStudentId,
     required AddCopyUsecase addCopyUsecase,
   })  : _fetchProfileByStudentId = fetchProfileByStudentId,
         _addCopyUsecase = addCopyUsecase,

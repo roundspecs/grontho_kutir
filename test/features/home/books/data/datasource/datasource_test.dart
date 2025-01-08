@@ -19,7 +19,7 @@ void main() {
   group('Profiles', () {
     test('Exists', () async {
       final ProfileDataSource profileDataSource = ProfileDataSourceImpl(client);
-      final profile = await profileDataSource.getProfileByEmail(
+      final profile = await profileDataSource.fetchProfileByEmail(
         'u2104122@student.cuet.ac.bd',
       );
       debugPrint('Log: $profile');
@@ -28,7 +28,7 @@ void main() {
 
     test('Does not exist', () async {
       final ProfileDataSource profileDataSource = ProfileDataSourceImpl(client);
-      final profile = await profileDataSource.getProfileByEmail(
+      final profile = await profileDataSource.fetchProfileByEmail(
         'u2104121@student.cuet.ac.bd',
       );
       debugPrint('Log: $profile');
