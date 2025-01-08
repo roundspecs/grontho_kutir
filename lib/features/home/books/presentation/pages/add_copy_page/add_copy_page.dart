@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grontho_kutir/grontho_kutir.dart';
 
@@ -13,7 +14,10 @@ class AddCopyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddCopyCubit(),
+      create: (context) => AddCopyCubit(
+        fetchProfileByStudentId: GetIt.I(),
+        addCopyUsecase: GetIt.I(),
+      ),
       child: AddCopyView(bookId),
     );
   }

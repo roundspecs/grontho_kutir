@@ -4,8 +4,8 @@ class Copy {
   final int id;
   final String condition;
   final Book book;
-  final User owner;
-  final User representative;
+  final Profile owner;
+  final Profile representative;
 
   Copy({
     required this.owner,

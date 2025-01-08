@@ -62,6 +62,8 @@ class _AddCopyViewState extends State<AddCopyView> {
   }
 
   Row _buttonRow(BuildContext context) {
+    void pop() => context.pop();
+
     return Row(
       spacing: 16,
       children: [
@@ -70,8 +72,15 @@ class _AddCopyViewState extends State<AddCopyView> {
             child: const Text('Save'),
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                // TODO: Add copy
-                context.pop();
+                final success = await context.read<AddCopyCubit>().addCopy(
+                      bookId: widget.bookId,
+                      ownerId: _ownerIdController.text,
+                      representativeID: _representativeIdController.text,
+                      condition: _conditionController.text,
+                    );
+                if (success) {
+                  pop();
+                }
               }
             },
           ),
@@ -81,7 +90,12 @@ class _AddCopyViewState extends State<AddCopyView> {
             child: const Text('Save and Add Another'),
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                // TODO: Add copy
+                context.read<AddCopyCubit>().addCopy(
+                      bookId: widget.bookId,
+                      ownerId: _ownerIdController.text,
+                      representativeID: _representativeIdController.text,
+                      condition: _conditionController.text,
+                    );
                 _conditionController.clear();
                 _ownerIdController.clear();
                 _representativeIdController.clear();

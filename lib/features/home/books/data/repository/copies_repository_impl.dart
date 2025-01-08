@@ -30,4 +30,21 @@ class CopiesRepositoryImpl implements CopiesRepository {
       return Left(Failure());
     }
   }
+
+  @override
+  Future<Either<Failure, Copy>> addCopy({
+    required String bookId,
+    required String condition,
+    required String ownerId,
+    required String representativeID,
+  }) {
+    return _handleErrors(() async {
+      return await copiesDataSource.addCopy(
+        bookId: bookId,
+        condition: condition,
+        ownerId: ownerId,
+        representativeID: representativeID,
+      );
+    });
+  }
 }

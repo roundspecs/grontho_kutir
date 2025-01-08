@@ -14,8 +14,8 @@ class CopyModel extends Copy {
       id: json['id'],
       book: BookModel.fromJson(json['book']),
       condition: json['condition'],
-      owner: UserModel.fromMap(json['owner']),
-      representative: UserModel.fromMap(json['representative']),
+      owner: ProfileModel.fromJson(json['owner']),
+      representative: ProfileModel.fromJson(json['representative']),
     );
   }
 
@@ -27,5 +27,15 @@ class CopyModel extends Copy {
       'owner_id': owner.id,
       'representative_id': representative.id,
     };
+  }
+
+  @override
+  String toString() {
+    return 'CopyModel(id: $id, '
+        'book: $book, '
+        'condition: $condition, '
+        'owner: $owner, '
+        'representative: $representative'
+        ')';
   }
 }
