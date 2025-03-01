@@ -46,11 +46,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Title(
-      color: Theme.of(context).colorScheme.primary,
-      title: 'Register - গ্রন্থকুটির',
-      child: Scaffold(
-        body: Center(
+    return Scaffold(
+      body: Title(
+        color: Theme.of(context).colorScheme.primary,
+        title: 'Register - গ্রন্থকুটির',
+        child: Center(
           child: BlocConsumer<RegisterViewModel, RegisterState>(
             bloc: widget.viewModel,
             listenWhen: (previous, current) {
