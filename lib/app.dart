@@ -1,29 +1,32 @@
-import 'package:flutter/material.dart' hide Router;
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
-import 'package:grontho_kutir/grontho_kutir.dart';
 
-class App extends StatefulWidget {
+import 'routing/router.dart';
+import 'ui/auth/login/view_model/login_view_model.dart';
+import 'ui/auth/register/view_model/register_view_model.dart';
+import 'ui/core/themes/theme.dart';
+
+class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<AuthBloc>().add(const AuthGetCurrentUserProfileEvent());
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Grontho Kutir',
-      theme: theme(context),
-      routerConfig: GetIt.I<Router>().config,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => LoginViewModel(profileRepository: context.read()),
+        ),
+        BlocProvider(
+          create: (_) => RegisterViewModel(profileRepository: context.read()),
+        ),
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        routerConfig: router(context.read()),
+      ),
     );
   }
 }
