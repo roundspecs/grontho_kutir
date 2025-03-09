@@ -20,5 +20,5 @@ abstract final class Routes {
   static const notFoundRelative = 'not-found';
   static const notFound = '/$notFoundRelative';
 
-  static const unauthRoutes = [logIn, register, books];
+  static const unauthRoutes = [logIn, register, books, home];
 }
